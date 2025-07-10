@@ -6,6 +6,7 @@
   padding: 0px;
 }
 
+/* Сторона з календарем */
 .calendarSide {
   width: 380px;
   flex-shrink: 0;
@@ -14,10 +15,28 @@
   align-self: flex-start;
 }
 
+/* Сторона з новинами */
 .contentSide {
   flex: 1;
   min-width: 0;
-  padding: 0; 
+  padding: 0;
   margin: 0;
 }
 
+/* 📱 Мобільні і планшети — календар зверху */
+@media (max-width: 1023px) {
+  .pageWrapper {
+    flex-direction: column;
+  }
+
+  .calendarSide {
+    width: 100%;
+    position: static;
+    top: auto;
+    align-self: stretch;
+  }
+
+  .contentSide {
+    width: 100%;
+  }
+}
