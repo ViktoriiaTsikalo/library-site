@@ -8,6 +8,8 @@ import uk from 'date-fns/locale/uk';
 
 registerLocale('uk', uk);
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const AddNewsForm = ({ onNewsAdded }) => {
   const [form, setForm] = useState({ title: '', description: '' });
   const [mediaFiles, setMediaFiles] = useState([]);
@@ -32,7 +34,7 @@ export const AddNewsForm = ({ onNewsAdded }) => {
 
         try {
           const { data } = await axios.post(
-            'http://localhost:3000/api/news/upload-video',
+            `${API_URL}/api/news/upload-video`,
             formData,
             {
               headers: {
@@ -80,7 +82,7 @@ export const AddNewsForm = ({ onNewsAdded }) => {
     });
 
     try {
-      const res = await axios.post('http://localhost:3000/api/news', formData, {
+      const res = await axios.post(`${API_URL}/api/news`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

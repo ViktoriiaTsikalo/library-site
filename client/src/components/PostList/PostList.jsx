@@ -4,6 +4,8 @@ import css from './PostList.module.css';
 import { AddNewsModal } from '../AddNewsModal/AddNewsModal.jsx';
 import { MediaGalleryModal } from '../MediaGalleryModal/MediaGalleryModal.jsx';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const PostList = () => {
   const [newsList, setNewsList] = useState([]);
   const [page, setPage] = useState(1);
@@ -14,7 +16,7 @@ export const PostList = () => {
 
   const fetchNews = async (page = 1) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/news?page=${page}&limit=10`);
+      const res = await axios.get(`${API_URL}/api/news?page=${page}&limit=10`);
       setNewsList(page === 1 ? res.data.news : prev => [...prev, ...res.data.news]);
       setTotalPages(res.data.totalPages);
     } catch (error) {
@@ -29,7 +31,7 @@ export const PostList = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Ви впевнені, що хочете видалити новину?')) return;
     try {
-      await axios.delete(`http://localhost:3000/api/news/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`${API_URL}/api/news/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       setPage(1);
       fetchNews(1);
     } catch {
@@ -45,7 +47,7 @@ export const PostList = () => {
 
   const openGallery = (imgUrls = [], videoUrl, clickedIndex = 0) => {
     const mediaItems = [
-      ...(imgUrls || []).map((url) => ({ type: 'image', url: `http://localhost:3000${url}` })),
+      ...(imgUrls || []).map((url) => ({ type: 'image', url: `${API_URL}${url}` })),
       ...(videoUrl ? [{ type: 'video', url: videoUrl }] : [])
     ];
     setGalleryData({
@@ -76,7 +78,7 @@ export const PostList = () => {
                   <img
                     key={`img-${i}`}
                     className={css.mediaItem}
-                    src={`http://localhost:3000${url}`}
+                    src={`${API_URL}${url}`}
                     alt={`Зображення ${i + 1}`}
                     onClick={() => openGallery(news.imgUrls, news.videoUrl, i)}
                   />

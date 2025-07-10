@@ -3,6 +3,8 @@ import axios from 'axios';
 import css from './CatalogPage.module.css';
 import { AddBookModal } from '../components/AddBookModal/AddBookModal';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const CatalogPage = () => {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1);
@@ -13,7 +15,7 @@ export const CatalogPage = () => {
 
   const fetchBooks = async (page = 1, searchTerm = '') => {
     try {
-      const res = await axios.get('http://localhost:3000/api/catalog', {
+      const res = await axios.get(`${API_URL}/api/catalog`, {
         params: { page, limit: 20, search: searchTerm },
       });
 
@@ -43,7 +45,7 @@ export const CatalogPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Ви впевнені, що хочете видалити цю книгу?')) return;
     try {
-      await axios.delete(`http://localhost:3000/api/catalog/${id}`, {
+      await axios.delete(`${API_URL}/api/catalog/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPage(1);

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import css from './AddLinkModal.module.css';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const AddLinkModal = ({ category, onClose, onLinkAdded }) => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -19,7 +21,7 @@ export const AddLinkModal = ({ category, onClose, onLinkAdded }) => {
 
     try {
       await axios.post(
-        'http://localhost:3000/api/links',
+        `${API_URL}/api/links`,
         { title, url, grade, author, category },
         {
           headers: {

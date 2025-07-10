@@ -1,17 +1,21 @@
 import axios from 'axios';
 
-export const fetchEvents = () => axios.get('http://localhost:3000/api/events');
+// Отримуємо URL з змінної середовища
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const fetchEvents = () => axios.get(`${API_URL}/api/events`);
 
 export const addEvent = data =>
-  axios.post('http://localhost:3000/api/events', data, {
+  axios.post(`${API_URL}/api/events`, data, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
 
 export const deleteEvent = id =>
-  axios.delete(`http://localhost:3000/api/events/${id}`, {
+  axios.delete(`${API_URL}/api/events/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
+

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import css from './AddBookModal.module.css';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const AddBookModal = ({ onClose, onBookAdded }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -18,7 +20,7 @@ export const AddBookModal = ({ onClose, onBookAdded }) => {
 
     try {
       await axios.post(
-        'http://localhost:3000/api/catalog',
+        `${API_URL}/api/catalog`,
         { title, author, year },
         {
           headers: {

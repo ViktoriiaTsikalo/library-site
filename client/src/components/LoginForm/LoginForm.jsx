@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import css from './LoginForm.module.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const LoginForm = () =>{
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +13,7 @@ export const LoginForm = () =>{
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/api/login', { username, password });
+      const res = await axios.post(`${API_URL}/api/login`, { username, password });
       localStorage.setItem('token', res.data.token);
       navigate('/news');
     } catch {

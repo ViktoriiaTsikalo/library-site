@@ -12,9 +12,11 @@ export const LinkCategoryPage = () => {
   const [showModal, setShowModal] = useState(false);
   const token = localStorage.getItem('token');
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const fetchLinks = async (page = 1) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/links`, {
+      const res = await axios.get(`${API_URL}/api/links`, {
         params: {
           category,
           page,
@@ -50,7 +52,7 @@ export const LinkCategoryPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Ви впевнені, що хочете видалити це посилання?')) return;
     try {
-      await axios.delete(`http://localhost:3000/api/links/${id}`, {
+      await axios.delete(`${API_URL}/api/links/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPage(1);
