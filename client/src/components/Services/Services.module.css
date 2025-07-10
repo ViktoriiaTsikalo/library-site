@@ -1,0 +1,70 @@
+.servicesSection {
+  background-color: #fbf9f6;
+  padding: 80px 20px;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 32px;
+  color: #9e2a2b;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.servicesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  counter-reset: service;
+}
+
+.serviceItem {
+  background-color: #fff;
+  border: 1px solid #e2e2e2;
+  border-left: 6px solid #9e2a2b;
+  border-radius: 16px;
+  padding: 30px 25px;
+  box-shadow: 0 8px 20px rgba(158, 42, 43, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.serviceItem:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(158, 42, 43, 0.15);
+}
+
+.serviceItem h3 {
+  position: relative;
+  font-size: 20px;
+  color: #2e2e2e;
+  padding-left: 45px;
+  margin-bottom: 15px;
+}
+
+.serviceItem h3::before {
+  content: counter(service) ".";
+  counter-increment: service;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 26px;
+  color: #9e2a2b;
+  font-weight: bold;
+}
+
+.serviceItem ul {
+  padding-left: 20px;
+  color: #555;
+}
+
+.serviceItem ul li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}

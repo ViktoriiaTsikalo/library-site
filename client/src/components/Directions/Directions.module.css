@@ -1,0 +1,68 @@
+.directionsSection {
+  background-color: #fbf9f6;
+  padding: 70px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 30px;
+  color: #9e2a2b;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.directionsList {
+  counter-reset: direction;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.directionItem {
+  background-color: #fff;
+  padding: 30px;
+  border-left: 8px solid #9e2a2b;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(158, 42, 43, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.directionItem:hover {
+  transform: translateY(-4px);
+  background-color: #fff5f5;
+}
+
+.directionItem h3 {
+  position: relative;
+  margin-bottom: 15px;
+  padding-left: 45px;
+  font-size: 20px;
+  color: #2e2e2e;
+}
+
+.directionItem h3::before {
+  content: counter(direction) ".";
+  counter-increment: direction;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 28px;
+  color: #9e2a2b;
+  font-weight: 700;
+}
+
+.directionItem ul {
+  padding-left: 20px;
+  color: #444;
+}
+
+.directionItem ul li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}

@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: inherit;
+}
+
+body {
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+}
+
+ul, ol{
+  list-style: none;
+}
+
+.react-calendar {
+  border: none !important;
+  background: rgb(255, 255, 255) !important;
+  max-width: 100% !important;
+  min-width: unset !important; 
+  display: block !important;
+}
+
+.react-calendar__tile {
+  padding: 10px;
+  background: #fff !important;
+  color: #000;
+  border-radius: 8px;
+  transition: 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__tile--now {
+  background: rgba(255, 0, 0, 0.1); /* Сьогоднішня дата */
+  color: red;
+}
+
+
+

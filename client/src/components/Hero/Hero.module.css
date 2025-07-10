@@ -1,0 +1,176 @@
+.heroContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero {
+  background-image: url(../../assets/images/hero.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 100px;
+  padding-right: 180px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: inset 2px 1px rgba(46, 47, 66, 0.08),
+              0px 1px 1px rgba(46, 47, 66, 0.16),
+              0px 1px 6px rgba(46, 47, 66, 0.08);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.title {
+  max-width: 1000px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 42px;
+  padding: 20px 30px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  animation: slideIn 1.2s ease-in-out;
+}
+
+.heroList {
+  display: flex;
+  gap: 40px;
+  align-items: baseline;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.heroList li {
+  list-style: none;
+}
+
+.heroListSchedule,
+.heroListServices {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  width: 150px;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.heroListSchedule {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid transparent;
+}
+
+.heroListSchedule:hover {
+  background-color: #f8f8f8;
+  transform: scale(1.05);
+}
+
+.heroListServices {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.heroListServices:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.heroListLibrarian {
+  margin-left: auto;
+  margin-top: 40px;
+}
+
+.heroListLibrarianLink {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: transform 0.3s ease;
+  background-color: rgba(129, 40, 40, 0.563);
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-right: 12px;
+  height: 50px;
+}
+
+.heroListLibrarianLink:hover {
+  transform: translateY(-2px);
+}
+
+.heroListLibrarianIcon {
+  background-color: #fff;
+  padding: 7px 8px;
+  border-radius: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.heroListLibrarianIcon:hover {
+  background-color: #eaeaea;
+}
+
+.iconLibrarian {
+  fill: #000;
+}
+
+.heroListLibrarianLogo {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .hero {
+    padding: 40px 20px;
+    text-align: left;
+  }
+
+  .title {
+    font-size: 28px;
+    max-width: 100%;
+  }
+
+  .heroList {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    align-items: start;
+    justify-content: start;
+  }
+
+  .heroListLibrarian {
+    grid-column: 1 / span 2;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .heroListLibrarianLink {
+    width: fit-content;
+  }
+}
+
+/* Анімації */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

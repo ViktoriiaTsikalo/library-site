@@ -1,0 +1,47 @@
+.footer {
+  background: #484747;
+  color: #f1faee;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fcd5ce;
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.infoList li a {
+  color: #fbc4ab;
+  text-decoration: underline;
+}
+
+.infoList li a:hover {
+  color: #ffddd2;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+  color: #ced4da;
+}
+
+@media (max-width: 600px) {
+  .infoList {
+    font-size: 14px;
+  }
+}

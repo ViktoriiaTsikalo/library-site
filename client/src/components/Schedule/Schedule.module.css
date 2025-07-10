@@ -1,0 +1,106 @@
+.thirdSection {
+  padding: 70px 20px;
+  background-color: #fbf9f6;
+}
+
+.thirdSectionTitle {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #9e2a2b;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.schedule {
+  background: linear-gradient(145deg, #9e362a 50%, #dfa37e 100%);
+  padding: 80px 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.scheduleList {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+  justify-items: center;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
+}
+
+/* Картка одного дня */
+.scheduleListDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 220px;
+  padding: 24px 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-right: 1px solid #ffffff33;
+}
+
+.scheduleListDay:hover {
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.scheduleListItem {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+.scheduleListText {
+  color: #fbf9f6;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.sunday {
+  border: none;
+}
+
+.iconLibrarian {
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.scheduleListDay:hover .iconLibrarian {
+  transform: scale(1.1);
+}
+
+/* 📱 Телефони ≥ 480px — по 2 */
+@media screen and (min-width: 480px) {
+  .scheduleList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 🧾 Планшети ≥ 768px — по 3 */
+@media screen and (min-width: 768px) {
+  .scheduleList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 💻 Десктопи ≥ 1024px — по 4 */
+@media screen and (min-width: 1024px) {
+  .scheduleList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 🖥 Величезні екрани ≥ 1400px — по 7 */
+@media screen and (min-width: 1400px) {
+  .scheduleList {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
