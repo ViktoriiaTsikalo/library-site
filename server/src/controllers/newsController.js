@@ -28,7 +28,12 @@ export const getAllNews = async (req, res) => {
 };
 
 export const createNews = async (req, res) => {
+ console.log('📥 req.body:', req.body);
+  console.log('📸 req.files:', req.files);
+  console.log('Files:', req.files);
+console.log('Body:', req.body);
   try {
+   
     const { title, description, videoUrl, videoThumbnailUrl, eventDate } = req.body;
 
     if (!title || !description || !eventDate) {
@@ -40,21 +45,8 @@ export const createNews = async (req, res) => {
       return res.status(400).json({ message: 'Некоректна дата події' });
     }
 
-    let imgUrls = [];
-
-    if (req.files && req.files.length > 0) {
-      const { v2: cloudinary } = await import('cloudinary');
-
-      // Завантаження кожного зображення до Cloudinary
-      const uploadPromises = req.files.map(file => {
-        return cloudinary.uploader.upload(file.path, {
-          folder: 'library-news-images',
-        });
-      });
-
-      const uploadedResults = await Promise.all(uploadPromises);
-      imgUrls = uploadedResults.map(result => result.secure_url);
-    }
+    // ✅ Просто отримуємо посилання з Cloudinary
+    const imgUrls = req.files ? req.files.map(file => file.path) : [];
 
     const newItem = await News.create({
       title,
@@ -67,11 +59,14 @@ export const createNews = async (req, res) => {
 
     res.status(201).json(newItem);
   } catch (error) {
-    console.error('Error in createNews:', error);
-    res.status(500).json({ message: 'Внутрішня помилка сервера' });
+    console.error('❌ Error in createNews:', error);
+    res.status(500).json({
+      message: 'Внутрішня помилка сервера',
+      error: error.message,
+      stack: error.stack,
+    });
   }
 };
-
 export const deleteNews = async (req, res) => {
   try {
     const { id } = req.params;

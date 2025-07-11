@@ -51,7 +51,7 @@ export const PostList = () => {
 
   const openGallery = (imgUrls = [], videoUrl, clickedIndex = 0) => {
     const mediaItems = [
-      ...(imgUrls || []).map((url) => ({ type: 'image', url: `${API_URL}${url}` })),
+      ...(imgUrls || []).map((url) => ({ type: 'image', url })),
       ...(videoUrl ? [{ type: 'video', url: videoUrl }] : [])
     ];
     setGalleryData({
@@ -82,7 +82,7 @@ export const PostList = () => {
                   <img
                     key={`img-${i}`}
                     className={css.mediaItem}
-                    src={`${API_URL}${url}`}
+                    src={url}
                     alt={`Зображення ${i + 1}`}
                     onClick={() => openGallery(news.imgUrls, news.videoUrl, i)}
                   />
