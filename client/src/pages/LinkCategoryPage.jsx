@@ -11,10 +11,12 @@ export const LinkCategoryPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const token = localStorage.getItem('token');
+  const [isLoading, setIsLoading] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchLinks = async (page = 1) => {
+    setIsLoading(true);
     try {
       const res = await axios.get(`${API_URL}/api/links`, {
         params: {
@@ -31,6 +33,8 @@ export const LinkCategoryPage = () => {
       setTotalPages(res.data.totalPages);
     } catch {
       alert('Помилка при завантаженні посилань');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -71,7 +75,11 @@ export const LinkCategoryPage = () => {
   return (
     <div className={css.wrapper}>
       <h1 className={css.title}>{titleMap[category] || 'Посилання'}</h1>
-
+ {token && (
+        <button className={css.addButton} onClick={() => setShowModal(true)}>
+          ➕ Додати посилання
+        </button>
+      )}
       <ul className={css.linkList}>
         {links.map((link) => (
           <li key={link._id} className={css.linkItem}>
@@ -90,18 +98,19 @@ export const LinkCategoryPage = () => {
           </li>
         ))}
       </ul>
-
+{isLoading && (
+  <div className={css.loader}>
+    <div></div>
+  </div>
+)}
       {page < totalPages && (
         <button className={css.addButton} onClick={() => setPage(prev => prev + 1)}>
           Показати більше
         </button>
       )}
 
-      {token && (
-        <button className={css.addButton} onClick={() => setShowModal(true)}>
-          ➕ Додати посилання
-        </button>
-      )}
+     
+      
 
       {showModal && (
         <AddLinkModal

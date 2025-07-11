@@ -12,8 +12,10 @@ export const CatalogPage = () => {
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState(false);
   const token = localStorage.getItem('token');
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchBooks = async (page = 1, searchTerm = '') => {
+    setIsLoading(true);
     try {
       const res = await axios.get(`${API_URL}/api/catalog`, {
         params: { page, limit: 20, search: searchTerm },
@@ -28,6 +30,8 @@ export const CatalogPage = () => {
       setTotalPages(res.data.totalPages);
     } catch {
       alert('Не вдалося завантажити книги');
+    }finally{
+      setIsLoading(false);
     }
   };
 
@@ -72,7 +76,11 @@ export const CatalogPage = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-
+{token && (
+        <button className={css.addButton} onClick={() => setShowModal(true)}>
+          ➕ Додати книгу
+        </button>
+      )}
       <table className={css.table}>
         <thead>
           <tr>
@@ -102,18 +110,18 @@ export const CatalogPage = () => {
           ))}
         </tbody>
       </table>
-
+      {isLoading && (
+        <div className={css.loader}>
+          <div></div>
+        </div>
+      )}
       {page < totalPages && (
         <button className={css.addButton} onClick={handleLoadMore}>
           📚 Показати більше
         </button>
       )}
 
-      {token && (
-        <button className={css.addButton} onClick={() => setShowModal(true)}>
-          ➕ Додати книгу
-        </button>
-      )}
+      
 
       {showModal && (
         <AddBookModal onClose={() => setShowModal(false)} onBookAdded={handleBookAdded} />

@@ -54,7 +54,7 @@ export const AppBar = () => {
           </NavLink>
           <ul className={css.dropdownMenu}>
             <li><NavLink to="/links/teachers" className={css.anchorLink} onClick={closeMenu}>👩‍🏫 Для вчителів</NavLink></li>
-            <li><NavLink to="/links/students" className={css.anchorLink} onClick={closeMenu}>🧒 Для учнів</NavLink></li>
+            <li><NavLink to="/links/students" className={css.anchorLink} onClick={closeMenu}>🧒 Для здобувачів освіти</NavLink></li>
             <li><NavLink to="/links/parents" className={css.anchorLink} onClick={closeMenu}>👨‍👩‍👧 Для батьків</NavLink></li>
           </ul>
         </div>

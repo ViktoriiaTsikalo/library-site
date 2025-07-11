@@ -1,21 +1,40 @@
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
+import dotenv from 'dotenv';
 
-// Створити папку uploads, якщо не існує
-const uploadsDir = path.resolve('uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
-}
+dotenv.config();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueName);
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// ✅ Універсальне сховище для фото й відео
+const universalStorage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => {
+    const isVideo = file.mimetype.startsWith('video/');
+    return {
+      folder: isVideo ? 'library-news-videos' : 'library-news-images',
+      resource_type: isVideo ? 'video' : 'image',
+      format: isVideo ? 'mp4' : undefined,
+      public_id: Date.now() + '-' + file.originalname,
+    };
   },
 });
 
-export const upload = multer({ storage });
+// ✅ Multer middleware
+export const uploadUniversal = multer({ storage: universalStorage });
+
+// ✅ Додатково: утиліта для створення превʼю з Cloudinary
+export const getVideoThumbnailUrl = (publicId) => {
+  return cloudinary.url(publicId, {
+    resource_type: 'video',
+    format: 'jpg',
+    start_offset: 1,
+    width: 400,
+    crop: 'scale',
+  });
+};

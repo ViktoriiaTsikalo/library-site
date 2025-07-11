@@ -1,4 +1,5 @@
 import { newsCollection as News } from '../../db/models/news.js';
+import { getVideoThumbnailUrl } from '../middlewares/upload.js';
 
 export const getAllNews = async (req, res) => {
   try {
@@ -39,7 +40,21 @@ export const createNews = async (req, res) => {
       return res.status(400).json({ message: 'Некоректна дата події' });
     }
 
-    const imgUrls = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+    let imgUrls = [];
+
+    if (req.files && req.files.length > 0) {
+      const { v2: cloudinary } = await import('cloudinary');
+
+      // Завантаження кожного зображення до Cloudinary
+      const uploadPromises = req.files.map(file => {
+        return cloudinary.uploader.upload(file.path, {
+          folder: 'library-news-images',
+        });
+      });
+
+      const uploadedResults = await Promise.all(uploadPromises);
+      imgUrls = uploadedResults.map(result => result.secure_url);
+    }
 
     const newItem = await News.create({
       title,
@@ -81,18 +96,10 @@ export const uploadNewsVideo = async (req, res) => {
       return res.status(400).json({ message: 'Файл відео не знайдено' });
     }
 
-    const videoUrl = req.file.path;
-    const publicId = req.file.filename;
+    const videoUrl = req.file.path; // Cloudinary URL
+    const publicId = req.file.filename; // Це буде Date.now() + originalname
 
-    const { v2: cloudinary } = await import('cloudinary');
-
-    const videoThumbnailUrl = cloudinary.url(publicId, {
-      resource_type: 'video',
-      format: 'jpg',
-      start_offset: 1,
-      width: 400,
-      crop: 'scale',
-    });
+    const videoThumbnailUrl = getVideoThumbnailUrl(publicId);
 
     console.log('✅ Prevʼю URL:', videoThumbnailUrl);
 

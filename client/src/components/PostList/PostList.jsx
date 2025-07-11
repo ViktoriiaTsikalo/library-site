@@ -7,6 +7,7 @@ import { MediaGalleryModal } from '../MediaGalleryModal/MediaGalleryModal.jsx';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const PostList = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [newsList, setNewsList] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -15,13 +16,16 @@ export const PostList = () => {
   const token = localStorage.getItem('token');
 
   const fetchNews = async (page = 1) => {
+    setIsLoading(true);
     try {
       const res = await axios.get(`${API_URL}/api/news?page=${page}&limit=10`);
       setNewsList(page === 1 ? res.data.news : prev => [...prev, ...res.data.news]);
       setTotalPages(res.data.totalPages);
     } catch (error) {
       console.error('Помилка завантаження новин:', error);
-    }
+    }finally {
+    setIsLoading(false);
+  }
   };
 
   useEffect(() => {
@@ -113,7 +117,11 @@ export const PostList = () => {
           </div>
         ))}
       </div>
-
+{isLoading && (
+  <div className={css.loader}>
+    <div></div>
+  </div>
+)}
       {page < totalPages && (
         <button className={css.button} onClick={() => setPage(prev => prev + 1)}>
           Показати більше

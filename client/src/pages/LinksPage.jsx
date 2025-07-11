@@ -17,7 +17,7 @@ export const LinksPage = () => {
           👩‍🏫 Для вчителів
         </button>
         <button className={css.linkButton} onClick={() => handleClick('students')}>
-          🧒 Для учнів
+          🧒 Для здобувачів освіти
         </button>
         <button className={css.linkButton} onClick={() => handleClick('parents')}>
           👨‍👩‍👧 Для батьків
