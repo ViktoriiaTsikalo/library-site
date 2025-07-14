@@ -77,7 +77,6 @@
   display: none;
 }
 
-/* Десктопне представлення */
 @media screen and (min-width: 1024px) {
   .librarian {
     flex-direction: row;

@@ -28,10 +28,7 @@ export const getAllNews = async (req, res) => {
 };
 
 export const createNews = async (req, res) => {
- console.log('📥 req.body:', req.body);
-  console.log('📸 req.files:', req.files);
-  console.log('Files:', req.files);
-console.log('Body:', req.body);
+console.log('📩 Новина отримана від клієнта:', req.body.title);
   try {
    
     const { title, description, videoUrl, videoThumbnailUrl, eventDate } = req.body;

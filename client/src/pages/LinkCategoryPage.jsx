@@ -68,7 +68,7 @@ export const LinkCategoryPage = () => {
 
   const titleMap = {
     teachers: 'Посилання для вчителів',
-    students: 'Посилання для учнів',
+    students: 'Посилання для здобувачів освіти',
     parents: 'Посилання для батьків',
   };
 
